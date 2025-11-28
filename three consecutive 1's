@@ -1,0 +1,70 @@
+#include <iostream> 
+#include <string> 
+using namespace std; 
+ 
+void state1(string w, int i); 
+void state2(string w, int i); 
+void state3(string w, int i); 
+void state4(string w, int i); 
+ 
+void state1(string w, int i){ 
+    cout<<"State 1"<<endl; 
+    if(i==w.length()){ 
+        cout<<"string is rejected"<<endl; 
+        return; 
+    }else{ 
+        if(w[i]=='1'){ 
+            state1(w, i+1); 
+        }if(w[i]=='0'){ 
+            state2(w, i+1); 
+        } 
+    } 
+} 
+ 
+void state2(string w, int i){ 
+    cout<<"state 2"<<endl; 
+    if(i==w.length()){ 
+        cout<<"string is rejected"<<endl; 
+        return; 
+    }else{ 
+        if(w[i]=='1'){ 
+            state1(w, i+1); 
+        }if(w[i]=='0'){ 
+            state3(w, i+1); 
+        } 
+    } 
+} 
+ 
+void state3(string w, int i){ 
+    cout<<"state 3"<<endl; 
+    if(i==w.length()){ 
+        cout<<"string is rejected"<<endl; 
+        return; 
+    }else{ 
+        if(w[i]=='1'){ 
+            state1(w, i+1); 
+        }if(w[i]=='0'){ 
+            state4(w, i+1); 
+        } 
+    } 
+} 
+ 
+void state4(string w, int i){ 
+    cout<<"state 4"<<endl; 
+    if(i==w.length()){ 
+        cout<<"string is accepted"<<endl; 
+        return; 
+    } 
+ 
+    if(w[i]=='0' || w[i]=='1'){ 
+        state4(w, i+1); 
+    } 
+} 
+ 
+int main(){ 
+    string w; 
+    cout<<"enter the word: "<<endl; 
+    cin>>w; 
+    state1(w, 0); 
+ 
+} 
