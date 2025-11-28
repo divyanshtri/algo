@@ -1,0 +1,48 @@
+#include <iostream> 
+#include <string> 
+using namespace std; 
+ 
+bool FA1(string w) { 
+    if (w.empty()) return false; 
+    return (w.back() == 'a'); 
+} 
+ 
+bool FA2(string w) { 
+    if (w.empty()) return false; 
+    return (w.front() == 'b'); 
+} 
+ 
+bool UnionFA(string w) { 
+    return (FA1(w) || FA2(w)); 
+} 
+ 
+bool IntersectionFA(string w) { 
+    return (FA1(w) && FA2(w)); 
+} 
+ 
+bool ConcatenationFA(string w) { 
+    int n = w.length(); 
+    for (int k = 0; k <= n; k++) { 
+        string x = w.substr(0, k);    
+        string y = w.substr(k);       
+        if (FA1(x) && FA2(y)) 
+            return true; 
+    } 
+    return false; 
+} 
+ 
+int main() { 
+    string w; 
+    cout << "Enter a string (over {a,b}): ";
+cin >> w; 
+cout << "\nResult of simulation:\n"; 
+cout << "L1 (ends with a): " << (FA1(w) ? "Accepted" : "Rejected") << endl; 
+cout << "L2 (starts with b): " << (FA2(w) ? "Accepted" : "Rejected") << endl; 
+cout << "\n(a) Union (L1 ∪ L2): "  
+<< (UnionFA(w) ? "Accepted" : "Rejected") << endl; 
+cout << "(b) Intersection (L1 ∩ L2): "  
+<< (IntersectionFA(w) ? "Accepted" : "Rejected") << endl; 
+cout << "(c) Concatenation (L1L2): "  
+<< (ConcatenationFA(w) ? "Accepted" : "Rejected") << endl; 
+return 0; 
+} 
